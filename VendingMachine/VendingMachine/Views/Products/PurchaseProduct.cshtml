@@ -1,0 +1,62 @@
+﻿@model IEnumerable<VendingMachine.Models.ProductList>
+
+@{
+    ViewData["Title"] = "Purchase Products";
+}
+
+<h2>Purchase Products</h2>
+
+<form asp-action="Purchase" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    if (Model.FirstOrDefault() != null)
+    {
+        @foreach (var item in Model.FirstOrDefault().Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityAvailable)
+            </td>
+            <td>
+                <input asp-for="@item.PurchaseQuantity" class="form-control" value="@item.PurchaseQuantity" />
+                <span asp-validation-for="@item.PurchaseQuantity" class="text-danger"></span>
+            </td>
+        </tr>
+    }
+    }
+
+    
+
+@*     @for (int i = 0; i < Model.ToList().Count; i++)
+    {
+        <div class="form-group">
+            <label asp-for="Products[i].Name" class="control-label"></label>
+            <input asp-for="Products[i].Name" class="form-control" />
+            <span asp-validation-for="Products[i].Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Products[i].Price" class="control-label"></label>
+            <input asp-for="Products[i].Price" class="form-control" />
+            <span asp-validation-for="Products[i].Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Products[i].QuantityAvailable" class="control-label"></label>
+            <input asp-for="Products[i].QuantityAvailable" class="form-control" />
+            <span asp-validation-for="Products[i].QuantityAvailable" class="text-danger"></span>
+        </div>
+        <hr />
+    } *@
+    <div class="form-group">
+        <input type="submit" value="Purchase" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

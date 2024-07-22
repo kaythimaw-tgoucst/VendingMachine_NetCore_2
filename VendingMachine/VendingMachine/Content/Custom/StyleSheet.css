@@ -1,0 +1,8 @@
+﻿
+body {
+    background-color: violet;
+   /* background-image: url(../Images/vms_background_image.jpg);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100% 100%
+}
